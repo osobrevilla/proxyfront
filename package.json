@@ -1,0 +1,29 @@
+{
+  "name": "proxyfront",
+  "version": "1.0.0",
+  "description": "A simple proxy for test ws/api/rest in localhost env",
+  "main": "index.js",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "http-proxy": "^1.11.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osobrevilla/proxyfront.git"
+  },
+  "keywords": [
+    "proxy",
+    "ajax",
+    "ws"
+  ],
+  "author": "Oscar Sobrevilla",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/osobrevilla/proxyfront/issues"
+  },
+  "homepage": "https://github.com/osobrevilla/proxyfront#readme"
+}
