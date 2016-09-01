@@ -1,6 +1,5 @@
-
 /*
- *  urlproxy.js - A super simple url proxy server
+ *  urlproxy.js (beta) - A super simple url proxy server
  *  2015, Oscar Sobrevilla
  *  Licensed under the MIT license.
  *
@@ -23,11 +22,11 @@
 var http = require('http');
 var url = require('url');
 var program = require('commander');
- 
+
 program
-  .version('0.0.1')
-  .option('-p, --port <n>', 'port used for proxy', parseInt)
-  .parse(process.argv);
+    .version('0.0.1')
+    .option('-p, --port <n>', 'port used for proxy', parseInt)
+    .parse(process.argv);
 
 const PORT = program.port || 5050;
 
@@ -37,12 +36,11 @@ function onRequest(clientReq, clientResp) {
 
     if (query && query.url) {
 
-        console.log('Proxy URL.. => ' + clientReq.url);
+        console.log('Proxy URL.. => ' + decodeURIComponent(clientReq.url));
 
         var urlParts = url.parse(query.url, true);
-
-        var basicAuth = query.basicAuth || null;
-        var proxy = http.request({
+        //var basicAuth = query.basicAuth || null;
+        var options = {
             protocol: urlParts.protocol,
             hostname: urlParts.hostname,
             port: urlParts.port || 80,
@@ -51,13 +49,13 @@ function onRequest(clientReq, clientResp) {
             auth: basicAuth,
             query: urlParts.query,
             headers: clientReq.headers
-        }, function(res) {
-            //var headers = {};
+        };
 
-            //headers['Content-Type'] = res.headers['content-type'];
+        var proxy = http.request(options, function(res) {
 
-            if (query.allowAllOrigin){
-              res.headers['Access-Control-Allow-Origin'] = '*';
+            if (query.allowAllOrigin) {
+                res.headers["Access-Control-Allow-Origin"] = "*";
+                res.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS";
             }
 
             clientResp.writeHead(200, res.headers);
@@ -66,9 +64,11 @@ function onRequest(clientReq, clientResp) {
                 end: true
             });
         });
+
         clientReq.pipe(proxy, {
             end: true
         });
+
     } else {
         clientResp.writeHead(200, {
             'Content-Type': 'image/x-icon'
@@ -80,5 +80,5 @@ function onRequest(clientReq, clientResp) {
 }
 
 http.createServer(onRequest).listen(PORT, function() {
-    console.log("working proxyfront.js over %s.. port", PORT);
+    console.log("Running proxyfront over port %s", PORT);
 });
