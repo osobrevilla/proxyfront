@@ -49,7 +49,8 @@ function onRequest(clientReq, clientResp) {
             path: urlParts.path,
             method: clientReq.method,
             auth: basicAuth,
-            query: urlParts.query
+            query: urlParts.query,
+            headers: clientReq.headers
         }, function(res) {
             var headers = {};
 
