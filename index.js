@@ -52,12 +52,12 @@ function onRequest(clientReq, clientResp) {
             query: urlParts.query,
             headers: clientReq.headers
         }, function(res) {
-            var headers = {};
+            //var headers = {};
 
-            headers['Content-Type'] = res.headers['content-type'];
+            //headers['Content-Type'] = res.headers['content-type'];
 
             if (query.allowAllOrigin){
-              headers['Access-Control-Allow-Origin'] = '*';
+              res.headers['Access-Control-Allow-Origin'] = '*';
             }
 
             clientResp.writeHead(200, headers);
