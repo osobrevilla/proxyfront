@@ -60,7 +60,7 @@ function onRequest(clientReq, clientResp) {
               res.headers['Access-Control-Allow-Origin'] = '*';
             }
 
-            clientResp.writeHead(200, headers);
+            clientResp.writeHead(200, res.headers);
 
             res.pipe(clientResp, {
                 end: true
