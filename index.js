@@ -11,12 +11,12 @@
  *
  *    @url: The url that i wanna apply the proxy
  *    @allowAllOrigin: set flag to 1 for write header "Access-Control-Allow-Origin" = "*" how response
- *    @basicAuth: server basic auth like user:password
+ *    @basicAuth: server basic auth like user:password (Optional)
  *
  *    var urlToProxy = encodeURIComponent("http://miurltoproxy.com?arg=1&arg=2..");
  *
  *    $.ajax({
- *        url: "http:localhost:5050?url=" + urlToProxy + "&allowAllOrigin=1&basicAuth=user:password");
+ *        url: "http://localhost:5050?url=" + urlToProxy + "&allowAllOrigin=1&basicAuth=user:password");
  *    });
  */
 
