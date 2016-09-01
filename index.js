@@ -47,7 +47,7 @@ function onRequest(clientReq, clientResp) {
             hostname: urlParts.hostname,
             port: urlParts.port || 80,
             path: urlParts.path,
-            method: 'GET',
+            method: clientReq.method,
             auth: basicAuth,
             query: urlParts.query
         }, function(res) {
